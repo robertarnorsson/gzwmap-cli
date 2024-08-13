@@ -1,6 +1,6 @@
 {
   "name": "gzwmap-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A CLI tool to make development of the gzwmap easier.",
   "main": "index.js",
   "scripts": {
