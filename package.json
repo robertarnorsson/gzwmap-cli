@@ -1,0 +1,34 @@
+{
+  "name": "gzwmap-cli",
+  "version": "1.0.0",
+  "description": "A CLI tool to make development of the gzwmap easier.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./bin/index.js"
+  },
+  "bin": {
+    "gzwmap-cli": "./bin/index.js"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robertarnorsson/gzwmap-cli.git"
+  },
+  "keywords": [
+    "gzwmap",
+    "cli",
+    "tool"
+  ],
+  "author": "Robert Arnorsson",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/robertarnorsson/gzwmap-cli/issues"
+  },
+  "homepage": "https://github.com/robertarnorsson/gzwmap-cli#readme",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "figlet": "^1.7.0",
+    "inquirer": "^10.1.8"
+  }
+}
