@@ -62,3 +62,6 @@ Updated the README to be more informative
 
 ### 1.1.0 (Added amount limits)
 Added amount limits to stop program from crashing
+
+### 1.1.1 (Added a publish checklist)
+Added a publish checklist to get consistent publishes

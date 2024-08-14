@@ -14,7 +14,7 @@ import { generatePOIId } from "../src/commands/gen_poi.js";
 import { generateItemId } from "../src/commands/gen_item.js";
 import { generateCustomId } from "../src/commands/gen_custom.js";
 
-program.version("1.0.1").description("GZWMap CLI Tool");
+program.version("1.1.1").description("GZWMap CLI Tool");
 
 const prefixes = {
   "Task":      {id: 1, function: generateTaskId},
