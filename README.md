@@ -59,3 +59,6 @@ The first version of the CLI tool
 
 ### 1.0.1 (README changes)
 Updated the README to be more informative
+
+### 1.1.0 (Added amount limits)
+Added amount limits to stop program from crashing

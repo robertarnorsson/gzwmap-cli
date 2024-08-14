@@ -45,6 +45,20 @@ program.command('gen')
     chalk.yellow(figlet.textSync("GZWMAP-CLI", { horizontalLayout: "full" }))
   );
 
+  if (amount > 1000) {
+    console.log(
+      chalk.redBright(`Can't create ${amount} IDs! Max 1000 IDs at a time`)
+    );
+
+    program.error("")
+  } else if (amount < 1) {
+    console.log(
+      chalk.redBright(`Can't create ${amount} IDs! Min 1 ID`)
+    );
+
+    program.error("")
+  };
+
   if (options.prefix) {
     const id = generateCustomId(options.prefix, amount, length);
 
@@ -66,7 +80,6 @@ program.command('gen')
       if (prefixFunc) {
         const id = prefixFunc(amount, length);
 
-        console.log('\n');
         console.log(id.join('\n'));
       } else {
         console.error("Invalid selection");
