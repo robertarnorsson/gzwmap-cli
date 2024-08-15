@@ -16,7 +16,7 @@ import { generatePOIId } from "../src/commands/gen/gen_poi.js";
 import { generateItemId } from "../src/commands/gen/gen_item.js";
 import { generateCustomId } from "../src/commands/gen/gen_custom.js";
 import path from "node:path";
-import { checkAllFiles } from "../src/commands/check/check_files.js";
+import { checkAllFiles, traverseDirectory } from "../src/commands/check/check_files.js";
 
 program.version("1.1.1").description("GZWMap CLI Tool");
 
@@ -108,13 +108,19 @@ program.command('check')
     ])
     .then(async (anwser) => {
       if (anwser.acceptDir == true) {
-        const ids = await checkAllFiles(currentDir);
-        return ids;
+        const ids = checkAllFiles(currentDir, { 
+          extensions: ['js', 'ts'],
+          excludeDirs: ['node_modules', '.next']
+        });
+        console.log(ids);
       }
     })
   } else {
-    const ids = await checkAllFiles(currentDir);
-    return ids;
+    const ids = checkAllFiles(currentDir, { 
+      extensions: ['js', 'ts'],
+      excludeDirs: ['node_modules', '.next']
+    });
+    console.log(ids);
   }
 })
 
