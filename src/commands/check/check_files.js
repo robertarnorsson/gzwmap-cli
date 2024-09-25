@@ -2,25 +2,33 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { checkFile } from '../../utils/file_util.js';
 
-export function checkAllFiles(dir, options = {}) {
-    const allIDs = [];
-    const duplicateIDs = [];
+export async function checkAllFiles(dir, options = {}) {
+    const allIDs = new Map();
+    const duplicateIDs = new Map();
 
-    const filesToCheck = traverseDirectory(dir, options).slice(0, 100);
+    const filesToCheck = traverseDirectory(dir, options);
 
-    filesToCheck.map(async (file) => {
+    const fileCheckPromises = filesToCheck.map(async (file) => {
         const ids = await checkFile(file);
-        
-        ids.map((id) => {
-            if (allIDs.includes(id)) {
-                duplicateIDs.push(id);
+
+        ids.forEach(({ id, filePath, lineNumber }) => {
+            if (allIDs.has(id)) {
+                if (!duplicateIDs.has(id)) {
+                    duplicateIDs.set(id, [...allIDs.get(id)]);
+                }
+                duplicateIDs.get(id).push({ filePath, lineNumber });
             } else {
-                allIDs.push(id);
+                allIDs.set(id, [{ filePath, lineNumber }]);
             }
-        })
+        });
     });
-    
-    return duplicateIDs;
+
+    await Promise.all(fileCheckPromises);
+
+    return Array.from(duplicateIDs.entries()).map(([id, occurrences]) => ({
+        id,
+        occurrences,
+    }));
 }
 
 export function traverseDirectory(dir, options = {}) {
@@ -29,12 +37,7 @@ export function traverseDirectory(dir, options = {}) {
 
     function shouldIncludeFile(filePath) {
         const fileExtension = path.extname(filePath).slice(1);
-
-        if (extensions.length > 0) {
-            return extensions.includes(fileExtension);
-        }
-
-        return true;
+        return extensions.length > 0 ? extensions.includes(fileExtension) : true;
     }
 
     function shouldExcludeDir(dirPath) {
@@ -59,6 +62,5 @@ export function traverseDirectory(dir, options = {}) {
     }
 
     readDir(dir);
-
     return results;
 }

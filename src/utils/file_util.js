@@ -1,22 +1,29 @@
 import fs from 'node:fs';
 
-export function checkFile(path) {
+export function checkFile(filePath) {
     return new Promise((resolve, reject) => {
-        fs.readFile(path, 'utf8', (err, data) => {
-        if (err) {
-            reject(err);
-            return;
-        }
+        fs.readFile(filePath, 'utf8', (err, data) => {
+            if (err) {
+                reject(err);
+                return;
+            }
 
-        const idRegex = /id: "(.*?)"/g;
-        const matches = data.matchAll(idRegex);
+            const idRegex = /id: "(.*?)"/g;
+            const idsFound = [];
+            const lines = data.split('\n');
 
-        const idsFound = [];
-        for (const match of matches) {
-            idsFound.push(match[1]);
-        }
+            lines.forEach((line, index) => {
+                const matches = [...line.matchAll(idRegex)];
+                matches.forEach(match => {
+                    idsFound.push({
+                        id: match[1],
+                        filePath: filePath,
+                        lineNumber: index + 1
+                    });
+                });
+            });
 
-        resolve(idsFound);
+            resolve(idsFound);
         });
     });
 }

@@ -5,15 +5,15 @@
 * [Installation](#installation)
 * [Usage](#usage)
 * [Commands](#commands)
-  * [gen](#gen)
-  * [check](#check)
+  * [``gen``](#gen)
+  * [``check``](#check)
 * [Available Prefixes](#available-prefixes)
 * [Contributing](#contributing)
 * [Changes](#changes)
 
 ## Description
 
-[GZWMap](https://github.com/robertarnorsson/gzwmap) CLI is a command-line utility designed to simplify the process of generating unique IDs for various markers and elements within the [gzwmap](https://github.com/robertarnorsson/gzwmap) project. With the ability to create IDs for Tasks, Objectives, Keys, LZs, Locations, POIs, and Items, this tool allows developers to quickly and efficiently generate identifiers with custom lengths and prefixes, ensuring smooth integration into the [gzwmap](https://github.com/robertarnorsson/gzwmap) project. Additionally, it includes a validation tool for checking the uniqueness of IDs across the project files.
+[GZWMap CLI](https://github.com/robertarnorsson/gzwmap) is a command-line utility designed to simplify the process of generating unique IDs for various markers and elements within the [gzwmap](https://github.com/robertarnorsson/gzwmap) project. With the ability to create IDs for Tasks, Objectives, Keys, LZs, Locations, POIs, and Items, this tool allows developers to quickly and efficiently generate identifiers with custom lengths and prefixes, ensuring smooth integration into the [gzwmap](https://github.com/robertarnorsson/gzwmap) project. Additionally, it includes a validation tool for checking the uniqueness of IDs across the project files.
 
 ## Installation
 To install the GZWMap CLI globally on your system, run the following command:
@@ -45,6 +45,8 @@ gzwmap-cli gen [amount] [length] [-p, --prefix <char>]
 gzwmap-cli gen 3 8 -p C
 ```
 This command will generate 3 IDs, each 8 characters long, with the prefix "C".
+
+---
 
 ### ``check``
 The ``check`` command scans the current project directory to ensure that all generated IDs are unique. It can also be run with the ``--force`` option to automatically use the current working directory without prompting for confirmation.
@@ -86,10 +88,13 @@ Released the first version of the CLI tool.
 Enhanced the README with additional details.
 
 ### 1.1.0 (ID Generation Limits)
-Added limits to prevent generating more than 1000 IDs at a time to avoid performance issues.
+Added limits for the [``gen``](#gen) command to prevent generating more than 1000 IDs at a time to avoid performance issues.
 
 ### 1.1.1 (Publish Checklist)
 Introduced a checklist for consistent releases and publishes.
 
 ### 1.2.0 (Duplicate ID Checker)
-Added the [check](#check) command to validate that all IDs across the project are unique.
+Added the [``check``](#check) command to validate that all IDs across the project are unique.
+
+### 1.2.1 (Bugfix Release)
+Major fix for the [``check``](#check) command to properly handle and report multiple occurrences of duplicate IDs across different files.
