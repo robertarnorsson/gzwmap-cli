@@ -5,8 +5,6 @@ import figlet from "figlet";
 import chalk from "chalk";
 import inquirer from "inquirer";
 
-import fs from 'node:fs';
-
 import { generateTaskId } from "../src/commands/gen/gen_task.js";
 import { generateObjectiveId } from "../src/commands/gen/gen_objective.js";
 import { generateKeyId } from "../src/commands/gen/gen_key.js";
@@ -15,10 +13,9 @@ import { generateLocationId } from "../src/commands/gen/gen_location.js";
 import { generatePOIId } from "../src/commands/gen/gen_poi.js";
 import { generateItemId } from "../src/commands/gen/gen_item.js";
 import { generateCustomId } from "../src/commands/gen/gen_custom.js";
-import path from "node:path";
-import { checkAllFiles, traverseDirectory } from "../src/commands/check/check_files.js";
+import { checkAllFiles } from "../src/commands/check/check_files.js";
 
-program.version("1.1.1").description("GZWMap CLI Tool");
+program.version("1.2.0").description("GZWMap CLI Tool");
 
 const prefixes = {
   "Task":      {id: 1, function: generateTaskId},
